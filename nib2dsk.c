@@ -7,7 +7,11 @@
 #include <stdarg.h>
 #include <fcntl.h>
 #include <string.h>
-#include <unistd.h>
+#ifdef _WIN32
+    #include <io.h>
+#else
+    #include <unistd.h>
+#endif
 #include <sys/stat.h>
 
 /********** Symbolic Constants **********/
