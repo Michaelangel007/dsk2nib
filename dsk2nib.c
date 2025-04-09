@@ -113,6 +113,13 @@ int main( int argc, char **argv )
 #if _DEBUG
     printf( "(DEBUG) " );
 #endif
+#ifdef _WIN32
+    #if _WIN64
+        printf( "Windows x64: " );
+    #else
+        printf( "Windows x86: " );
+    #endif
+#endif
     printf( "Apple II DSK to NIB Image Converter Version %d.%d\n\n",
         VERSION_MAJOR, VERSION_MINOR );
 
