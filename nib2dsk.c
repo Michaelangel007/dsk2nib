@@ -1,7 +1,9 @@
 //
 // nib2dsk.c - convert Apple II NIB image file into DSK file
 // Copyright (C) 1996, 2017 slotek@nym.hush.com
+// Copyleft {C} 2025 Michaelangel007
 //
+#define _CRT_SECURE_NO_WARNINGS // shutup MSVC
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
@@ -9,6 +11,10 @@
 #include <string.h>
 #ifdef _WIN32
     #include <io.h>
+    #define close _close
+    #define open  _open
+    #define read  _read
+    #define write _write
 #else
     #include <unistd.h>
 #endif
@@ -81,10 +87,18 @@ int main( int argc, char **argv )
     //
     dsk_init();
 
-    if ( ( infd = open( argv[ 1 ], O_RDONLY ) ) == -1 )
+    int read_flags = O_RDONLY;
+#ifdef _WIN32
+    read_flags |= _O_BINARY;
+#endif
+    if ( ( infd = open( argv[ 1 ], read_flags ) ) == -1 )
         fatal( "cannot open %s for reading", argv[ 1 ] );
 
-    if ( ( outfd = open( argv[ 2 ], O_RDWR | O_CREAT | O_TRUNC,
+    int write_flags = O_RDWR | O_CREAT | O_TRUNC;
+#ifdef _WIN32
+    write_flags |= _O_BINARY;
+#endif
+    if ( ( outfd = open( argv[ 2 ], write_flags,
         S_IREAD | S_IWRITE ) ) == -1 )
             fatal( "cannot open %s for writing", argv[ 2 ] );
 
