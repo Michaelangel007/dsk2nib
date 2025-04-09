@@ -539,7 +539,12 @@ void usage( char *path )
 //
 // myprintf
 //
+#ifdef _WIN32
+    // Not needed
+    // See: https://stackoverflow.com/questions/2354784/attribute-formatprintf-1-2-for-msvc
+#else
 #pragma argsused
+#endif
 void myprintf( char *format, ... )
 {
 #ifdef DEBUG
