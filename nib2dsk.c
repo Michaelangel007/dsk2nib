@@ -114,7 +114,7 @@ int main( int argc, char **argv )
 #define STATE_DONE  666
 void convert_image( void )
 {
-    int state;
+    int state = STATE_INIT;
     int addr_prolog_index, addr_epilog_index;
     int data_prolog_index, data_epilog_index;
     uchar byte;
