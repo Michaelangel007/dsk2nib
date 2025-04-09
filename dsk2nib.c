@@ -1,7 +1,9 @@
 //
 // dsk2nib.c - convert Apple II DSK image file format into NIB file
 // Copyright (C) 1996, 2017 slotek@nym.hush.com
+// Copyleft {C} 2025 Michaelangel007
 //
+#define _CRT_SECURE_NO_WARNINGS // shutup MSVC
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
@@ -9,6 +11,10 @@
 #include <string.h>
 #ifdef _WIN32
     #include <io.h>
+    #define close _close
+    #define open  _open
+    #define read  _read
+    #define write _write
 #else
     #include <unistd.h>
 #endif
@@ -293,13 +299,19 @@ void dsk_reset( void )
 void dsk_read( char *path )
 {
     int i, fd;
-
-    if ( ( fd = open( path, O_RDONLY ) ) == -1 )
+    int read_flags = O_RDONLY;
+#ifdef _WIN32
+    read_flags |= _O_BINARY;
+#endif
+    if ( ( fd = open( path, read_flags ) ) == -1 )
         fatal( "cannot open %s for reading", path );
 
-    for ( i = 0; i < TRACKS_PER_DISK; i++ )
-        if ( read( fd, dsk_buf[ i ], BYTES_PER_TRACK ) != BYTES_PER_TRACK )
-            fatal( "dsk write failure" );
+    for (i = 0; i < TRACKS_PER_DISK; i++)
+    {
+        int bytes_read = read( fd, dsk_buf[ i ], BYTES_PER_TRACK );
+        if (bytes_read != BYTES_PER_TRACK )
+            fatal( "dsk read failure, Track %d", i );
+    }
 
     close( fd );
 }
@@ -344,15 +356,18 @@ void nib_reset( void )
 void nib_write( char *path )
 {
     int i, fd;
-
-    if ( ( fd = open( path, O_RDWR | O_CREAT | O_TRUNC,
+    int write_flags = O_RDWR | O_CREAT | O_TRUNC;
+#ifdef _WIN32
+    write_flags |= _O_BINARY;
+#endif
+    if ( ( fd = open( path, write_flags,
         S_IREAD | S_IWRITE ) ) == -1 )
             fatal( "cannot open %s for writing", path );
 
     for ( i = 0; i < TRACKS_PER_DISK; i++ )
         if ( write( fd, nib_buf[ i ], BYTES_PER_NIB_TRACK ) !=
             BYTES_PER_NIB_TRACK )
-                fatal( "nib write error" );
+                fatal( "nib write error, track %d", i );
 
     close( fd );
 }
