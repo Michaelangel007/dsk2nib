@@ -104,6 +104,9 @@ int main( int argc, char **argv )
     int volume = DEFAULT_VOLUME;
     uchar *buf;
 
+#if _DEBUG
+    printf( "(DEBUG) " );
+#endif
     printf( "Apple II DSK to NIB Image Converter Version %d.%d\n\n",
         VERSION_MAJOR, VERSION_MINOR );
 

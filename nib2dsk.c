@@ -64,6 +64,9 @@ int main( int argc, char **argv )
 {
     int i;
 
+#if _DEBUG
+    printf( "(DEBUG) " );
+#endif
     printf( "Apple II NIB to DSK Image Converter Version %d.%d\n\n",
         VERSION_MAJOR, VERSION_MINOR );
 
