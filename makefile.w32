@@ -1,0 +1,30 @@
+# nmake /f makefile.w32
+# nmake /f makefile.w32 clean
+# nmake /f makefile.w32 debug
+#
+# MSVC 2022
+#     call "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Auxiliary\Build\vcvars64.bat"
+CC = cl.exe
+CFLAGS = /nologo /O2 /W2 /D_WIN32=1
+
+all: bin bin\dsk2nib.exe bin\nib2dsk.exe
+
+clean:
+	@del bin\*.exe bin\*.obj bin\*.ilk bin\*.pdb
+
+debug: bin bin\disk2nibble_debug.exe bin\nibble2disk_debug.exe
+
+bin:
+	mkdir bin
+
+bin\disk2nibble_debug.exe: dsk2nib.c
+	pushd bin && $(CC) /nologo /D_DEBUG=1 /W4 /Od /Zi ..\dsk2nib.c /Fe:disk2nibble_debug.exe && popd
+
+bin\nibble2disk_debug.exe: nib2dsk.c
+	pushd bin && $(CC) /nologo /D_DEBUG=1 /W4 /Od /Zi ..\nib2dsk.c /Fe:nibble2disk_debug.exe && popd
+
+bin\dsk2nib.exe: dsk2nib.c
+	pushd bin && $(CC) $(CFLAGS) ..\dsk2nib.c /Fe:dsk2nib.exe && popd
+
+bin\nib2dsk.exe: nib2dsk.c
+	pushd bin && $(CC) $(CFLAGS) ..\nib2dsk.c /Fe:nib2dsk.exe && popd
