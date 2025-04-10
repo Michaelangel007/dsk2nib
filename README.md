@@ -6,7 +6,7 @@ Apple II DSK-to-NIB and NIB-to-DSK image file conversion utilities.
 
 ## Windows
 
-1. Open the [MSVC.022/dsk_nib_utility.sln](https://github.com/Michaelangel007/dsk2nib/blob/master/MSVC.2022/dsk_nib_utility.sln
+1. Open the [MSVC.022/dsk_nib_utility.sln](https://github.com/Michaelangel007/dsk2nib/blob/master/MSVC.2022/dsk_nib_utility.sln)
 
 2. Build > Batch Build > dsk2nib and nib2dsk projects, Release, x64.
 
