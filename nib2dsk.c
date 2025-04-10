@@ -297,15 +297,15 @@ void convert_image( void )
                     if ( get_byte( &byte ) == 0 )
                         ueof( state );
                 } else {
-		    myprintf( "%s byte was %02x, "
-			      "expecting data prolog of %02x %02x %02x\n",
-			      ( data_prolog_index == 1 ) ? "Second" : "Third",
-			      byte,
-			      data_prolog[ 0 ],
-			      data_prolog[ 1 ],
-			      data_prolog[ 2 ] );
+                    myprintf( "%s byte was %02x, "
+                        "expecting data prolog of %02x %02x %02x\n",
+                        ( data_prolog_index == 1 ) ? "Second" : "Third",
+                        byte,
+                        data_prolog[ 0 ],
+                        data_prolog[ 1 ],
+                        data_prolog[ 2 ] );
                     state = 9;
-		}
+            }
                 break;
 
             //
