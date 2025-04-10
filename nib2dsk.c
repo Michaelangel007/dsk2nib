@@ -453,8 +453,8 @@ uchar odd_even_decode( uchar byte1, uchar byte2 )
 {
     uchar byte;
 
-    byte = ( byte1 << 1 ) & 0xaa;
-    byte |= byte2 & 0x55;
+    byte  = (byte1 << 1) & 0xaa;
+    byte |= (byte2     ) & 0x55;
 
     return byte;
 }
