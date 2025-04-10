@@ -475,7 +475,6 @@ static uchar table[ TABLE_SIZE ] = {
 };
 uchar untranslate( uchar x )
 {
-    uchar y;
     uchar *ptr;
     int index;
 
