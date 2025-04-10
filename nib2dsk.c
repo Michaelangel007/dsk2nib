@@ -68,8 +68,6 @@ void ueof( int state );
 
 int main( int argc, char **argv )
 {
-    int i;
-
 #if _DEBUG
     printf( "(DEBUG) " );
 #endif
