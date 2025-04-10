@@ -1,9 +1,10 @@
 # dsk2nib
+
 Apple II DSK-to-NIB and NIB-to-DSK image file conversion utilities.
 
 # Build
 
-# Windows
+## Windows
 
 1. Open the [MSVC.022/dsk_nib_utility.sln](https://github.com/Michaelangel007/dsk2nib/blob/master/MSVC.2022/dsk_nib_utility.sln
 
@@ -11,7 +12,7 @@ Apple II DSK-to-NIB and NIB-to-DSK image file conversion utilities.
 
 3. Output will be in `bin\` subdirectory.
 
-# Linux / macOS
+## Linux / macOS
 
 Run `make clean all` to produce the `dsk2nib` and `nib2dsk`
 executables. Use `make debug` to create debugging binaries, if desired.
